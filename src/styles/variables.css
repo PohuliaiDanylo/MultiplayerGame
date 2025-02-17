@@ -1,0 +1,12 @@
+:root {
+    --background-clr: #006d77;
+    --accent-clr: #83c5be;
+    --text-clr: #edf6f9;
+
+    --regular-ff: "Inter";
+
+    --large-fs: 48px;
+    --medium-fs: 16px;
+
+    --regular-gap: 16px;
+}
