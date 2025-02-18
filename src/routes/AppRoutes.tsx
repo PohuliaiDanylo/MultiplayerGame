@@ -2,8 +2,8 @@ import { Routes, Route, Navigate } from "react-router";
 
 import AuthLayout from "../layouts/AuthLayout";
 
-import LoginPage from "../pages/login/login";
-import SigninPage from "../pages/signin/signin";
+import LoginPage from "../pages/Login/Login";
+import SigninPage from "../pages/Signin/Signin";
 
 export default function AppRoutes() {
     return (

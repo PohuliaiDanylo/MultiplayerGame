@@ -21,6 +21,7 @@ export default function LoginPage() {
                 navigate("/sign-in");
             }}
             onSubmit={handleLogin}
+            type="login"
         />
     );
 }

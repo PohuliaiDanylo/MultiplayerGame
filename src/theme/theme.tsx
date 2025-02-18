@@ -11,17 +11,32 @@ const theme = createTheme({
                     },
                     "& .MuiFormLabel-root": {
                         color: "var(--text-clr)",
-                        opacity: 0.5,
                     },
-                    "& .MuiFormLabel-filled": {
-                        transform: "translate(14px, 0px) scale(75%)",
-                    },
-                    "& .MuiFormLabel-root.Mui-focused": {
+                    "& .MuiFormLabel-root.Mui-error": {
                         color: "var(--text-clr)",
-                        transform: "translate(14px, 0px) scale(75%)",
                     },
+                    "& .css-113d811-MuiFormLabel-root-MuiInputLabel-root": {
+                        background: "var(--accent-clr)",
+                        padding: "2px 8px",
+                        borderRadius: "4px",
+                    },
+
+                    "& .css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
+                        {
+                            color: "var(--accent-clr)",
+                            background: "var(--text-clr)",
+                        },
+
                     "& .MuiOutlinedInput-notchedOutline": {
                         border: "none",
+                    },
+
+                    "& .css-er619e-MuiFormHelperText-root.Mui-error": {
+                        position: "relative",
+                        background: "var(--accent-clr)",
+                        padding: "2px 8px",
+                        borderRadius: "4px",
+                        color: "var(--error-clr) !important",
                     },
                 },
             },

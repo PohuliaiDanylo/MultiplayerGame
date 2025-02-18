@@ -1,5 +1,8 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { Formik } from "formik";
+
+import { loginValidation } from "../validations/loginValidation";
+import { signinValidation } from "../validations/signinValidation";
 
 interface AuthFormProps {
     title: string;
@@ -7,6 +10,7 @@ interface AuthFormProps {
     fields: { name: string; type: string; placeholder: string }[];
     onButtonClick: () => void;
     onSubmit: (formData: Record<string, string>) => void;
+    type: "login" | "signin";
 }
 
 export default function AuthForm({
@@ -15,21 +19,8 @@ export default function AuthForm({
     fields,
     onButtonClick,
     onSubmit,
+    type,
 }: AuthFormProps) {
-    const [formData, setFormData] = useState<Record<string, string>>(
-        fields.reduce((acc, field) => {
-            acc[field.name] = "";
-            return acc;
-        }, {} as Record<string, string>)
-    );
-
-    const onChange = (eventTargetValue: string, fieldName: string) => {
-        setFormData({
-            ...formData,
-            [fieldName]: eventTargetValue,
-        });
-    };
-
     return (
         <div className=" w-xs">
             <header className=" flex items-center justify-between">
@@ -52,45 +43,63 @@ export default function AuthForm({
                     {buttonText}
                 </Button>
             </header>
-            <form className=" flex flex-col gap-(--regular-gap)">
-                {fields.map((field) => {
-                    return (
-                        <TextField
-                            key={field.name}
-                            fullWidth
-                            id={field.name}
-                            label={field.name}
-                            variant="outlined"
-                            type={field.type}
-                            value={formData[field.name]}
-                            onChange={(
-                                event: React.ChangeEvent<HTMLInputElement>
-                            ) => {
-                                onChange(event.target.value, field.name);
-                            }}
-                        />
-                    );
-                })}
-                <div className=" self-end">
-                    <Button
-                        onClick={() => {
-                            onSubmit(formData);
-                        }}
-                        sx={{
-                            background: "var(--text-clr)",
-                            color: "var(--background-clr)",
-                            fontFamily: "var(--regular-ff)",
-                            fontWeight: 700,
-                            textTransform: "none",
-                        }}
-                        variant="contained"
-                        disableElevation
-                        size="small"
+            <Formik
+                initialValues={fields.reduce((acc, field) => {
+                    acc[field.name] = "";
+                    return acc;
+                }, {} as Record<string, string>)}
+                validationSchema={
+                    type === "login" ? loginValidation : signinValidation
+                }
+                onSubmit={(values) => {
+                    alert(JSON.stringify(values, null, 2));
+                }}
+            >
+                {(formik) => (
+                    <form
+                        onSubmit={formik.handleSubmit}
+                        className=" flex flex-col gap-(--regular-gap) mt-[8px]"
                     >
-                        Proceed
-                    </Button>
-                </div>
-            </form>
+                        {fields.map((field) => {
+                            return (
+                                <TextField
+                                    error={
+                                        formik.touched[field.name] &&
+                                        Boolean(formik.errors[field.name])
+                                    }
+                                    helperText={
+                                        formik.touched[field.name] &&
+                                        formik.errors[field.name]
+                                    }
+                                    key={field.name}
+                                    id={field.name}
+                                    label={field.placeholder}
+                                    variant="outlined"
+                                    type={field.type}
+                                    {...formik.getFieldProps(field.name)}
+                                />
+                            );
+                        })}
+                        <div className=" self-end">
+                            <Button
+                                type="submit"
+                                sx={{
+                                    background: "var(--text-clr)",
+                                    color: "var(--background-clr)",
+                                    fontFamily: "var(--regular-ff)",
+                                    fontWeight: 700,
+                                    textTransform: "none",
+                                }}
+                                variant="contained"
+                                disableElevation
+                                size="small"
+                            >
+                                Proceed
+                            </Button>
+                        </div>
+                    </form>
+                )}
+            </Formik>
         </div>
     );
 }
