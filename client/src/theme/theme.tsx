@@ -20,17 +20,14 @@ const theme = createTheme({
                         padding: "2px 8px",
                         borderRadius: "4px",
                     },
-
                     "& .css-113d811-MuiFormLabel-root-MuiInputLabel-root.Mui-focused":
                         {
                             color: "var(--accent-clr)",
                             background: "var(--text-clr)",
                         },
-
                     "& .MuiOutlinedInput-notchedOutline": {
                         border: "none",
                     },
-
                     "& .css-er619e-MuiFormHelperText-root.Mui-error": {
                         position: "relative",
                         background: "var(--accent-clr)",
