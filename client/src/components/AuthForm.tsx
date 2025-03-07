@@ -51,9 +51,7 @@ export default function AuthForm({
                 validationSchema={
                     type === "login" ? loginValidation : signinValidation
                 }
-                onSubmit={(values) => {
-                    alert(JSON.stringify(values, null, 2));
-                }}
+                onSubmit={onSubmit}
             >
                 {(formik) => (
                     <form
