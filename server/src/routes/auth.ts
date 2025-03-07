@@ -1,11 +1,19 @@
-import { HTTP_STATUS_CODES } from "../utils";
-
 import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { User } from "../models/user";
 
+import { generateToken } from "../utils/tokenUtils";
+
 const router = express.Router();
+
+function sendDataToClient(res: Response, id: string, username: string) {
+    const token = generateToken(id, username);
+
+    res.json({
+        token,
+        user: { id: id, username: username },
+    });
+}
 
 router.post("/register", async (req: Request, res: Response) => {
     try {
@@ -25,18 +33,7 @@ router.post("/register", async (req: Request, res: Response) => {
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 
-        const token = jwt.sign(
-            { userId: newUser._id },
-            process.env.JWT_SECRET as string,
-            {
-                expiresIn: "7d",
-            }
-        );
-
-        res.json({
-            token,
-            user: { id: newUser._id, username: newUser.username },
-        });
+        sendDataToClient(res, newUser._id.toString(), newUser.username);
     } catch (error) {
         res.json({
             message: "Server Error",
@@ -64,18 +61,7 @@ router.post("/login", async (req: Request, res: Response) => {
             return;
         }
 
-        const token = jwt.sign(
-            { userId: user._id },
-            process.env.JWT_SECRET as string,
-            {
-                expiresIn: "7d",
-            }
-        );
-
-        res.json({
-            token,
-            user: { id: user._id, username: user.username },
-        });
+        sendDataToClient(res, user._id.toString(), user.username);
     } catch (error) {
         res.json({
             message: "Server Error",

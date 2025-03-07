@@ -43,6 +43,7 @@ export default function AppRoutes() {
                     />
                 }
             />
+            <Route path="*" element={<Navigate to={"/menu"} />} />
         </Routes>
     );
 }
