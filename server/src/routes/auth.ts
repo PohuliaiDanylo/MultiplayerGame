@@ -2,18 +2,9 @@ import express, { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { User } from "../models/user";
 
-import { generateToken } from "../utils/tokenUtils";
+import { sendDataToClient } from "../utils/dataToClientUtils";
 
 const router = express.Router();
-
-function sendDataToClient(res: Response, id: string, username: string) {
-    const token = generateToken(id, username);
-
-    res.json({
-        token,
-        user: { id: id, username: username },
-    });
-}
 
 router.post("/register", async (req: Request, res: Response) => {
     try {
