@@ -8,7 +8,8 @@ export default function SigninPage() {
     const navigate = useNavigate();
 
     const handleSignin = (data: Record<string, string>) => {
-        fetch("http://localhost:3000/api/auth/register", {
+        const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
+        fetch(`${API_URL}/api/auth/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -22,7 +23,7 @@ export default function SigninPage() {
                     alert(data.message);
                     return;
                 }
-                saveAuthData(data.token, data.user);
+                saveAuthData(data.token);
                 navigate("/menu");
             })
             .catch((err) => {

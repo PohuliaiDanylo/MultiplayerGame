@@ -8,7 +8,8 @@ export default function LoginPage() {
     const navigate = useNavigate();
 
     const handleLogin = (data: Record<string, string>) => {
-        fetch("http://localhost:3000/api/auth/login", {
+        const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
+        fetch(`${API_URL}/api/auth/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -22,7 +23,7 @@ export default function LoginPage() {
                     alert(data.message);
                     return;
                 }
-                saveAuthData(data.token, data.user);
+                saveAuthData(data.token);
                 navigate("/menu");
             })
             .catch((err) => {
