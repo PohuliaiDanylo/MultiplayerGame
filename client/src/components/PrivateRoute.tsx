@@ -1,21 +1,29 @@
 import { Navigate } from "react-router";
-
-import { getAuthToken } from "../utils/auth";
 import React from "react";
+
+import { useAuth } from "../context/AuthContext";
+
+import Loading from "../pages/Loading/Loading";
 
 interface PrivateRouteInterface {
     element: React.ReactElement;
-    tokenBool: boolean;
-    to: string;
+    isPrivate: boolean;
+    redirect: string;
 }
 
 const PrivateRoute: React.FC<PrivateRouteInterface> = ({
     element,
-    tokenBool,
-    to,
+    isPrivate,
+    redirect,
 }) => {
-    const token = getAuthToken();
-    return !token === !tokenBool ? element : <Navigate to={to} />;
+    const { user, loading } = useAuth();
+    if (loading)
+        return (
+            <div>
+                <Loading />
+            </div>
+        );
+    return !user === !isPrivate ? element : <Navigate to={redirect} />;
 };
 
 export default PrivateRoute;
