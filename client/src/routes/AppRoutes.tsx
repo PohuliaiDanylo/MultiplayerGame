@@ -17,8 +17,8 @@ export default function AppRoutes() {
                     element={
                         <PrivateRoute
                             element={<LoginPage />}
-                            tokenBool={false}
-                            to={"/menu"}
+                            isPrivate={false}
+                            redirect={"/menu"}
                         />
                     }
                 />
@@ -27,8 +27,8 @@ export default function AppRoutes() {
                     element={
                         <PrivateRoute
                             element={<SigninPage />}
-                            tokenBool={false}
-                            to={"/menu"}
+                            isPrivate={false}
+                            redirect={"/menu"}
                         />
                     }
                 />
@@ -38,8 +38,8 @@ export default function AppRoutes() {
                 element={
                     <PrivateRoute
                         element={<Menu />}
-                        tokenBool={true}
-                        to={"/login"}
+                        isPrivate={true}
+                        redirect={"/login"}
                     />
                 }
             />

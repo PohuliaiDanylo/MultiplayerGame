@@ -1,26 +1,15 @@
-import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 
-import { getUserData } from "../../utils/user";
-import { signOut } from "../../utils/auth";
+import { useAuth } from "../../context/AuthContext";
 
 export default function Menu() {
-    const [username, setUsername] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
-
-    useEffect(() => {
-        getUserData(setUsername);
-    }, []);
-
-    useEffect(() => {
-        if (username !== null) setLoading(false);
-    }, [username]);
+    const { user, logout } = useAuth();
 
     return (
         <div className=" bg-(--background-clr) min-h-screen overflow-hidden flex items-center justify-center">
             <div className=" items-start text-(--text-clr) flex flex-col gap-(--regular-gap)">
                 <div className=" w-full flex justify-between items-center">
-                    <p>{loading ? "Loading..." : username}</p>
+                    <p>{user?.username}</p>
                     <Button
                         sx={{
                             background: "var(--text-clr)",
@@ -32,7 +21,7 @@ export default function Menu() {
                         }}
                         variant="contained"
                         disableElevation
-                        onClick={signOut}
+                        onClick={logout}
                         size="small"
                     >
                         Sign out

@@ -12,7 +12,7 @@ router.get("/getData", async (req: AuthRequest, res: Response) => {
         res.json({ message: "session expired" });
         return;
     }
-    res.json({ username: existingUser.username });
+    res.json({ id: existingUser._id, username: existingUser.username });
 });
 
 export default router;

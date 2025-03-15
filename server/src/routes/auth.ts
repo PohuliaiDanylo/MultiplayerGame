@@ -24,7 +24,7 @@ router.post("/register", async (req: Request, res: Response) => {
         const newUser = new User({ username, password: hashedPassword });
         await newUser.save();
 
-        sendDataToClient(res, newUser._id.toString());
+        sendDataToClient(res, newUser._id.toString(), newUser.username);
     } catch (error) {
         res.json({
             message: "Server Error",
@@ -52,7 +52,7 @@ router.post("/login", async (req: Request, res: Response) => {
             return;
         }
 
-        sendDataToClient(res, user._id.toString());
+        sendDataToClient(res, user._id.toString(), user.username);
     } catch (error) {
         res.json({
             message: "Server Error",

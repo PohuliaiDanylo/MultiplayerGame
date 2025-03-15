@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router";
 
-import { saveAuthData } from "../../utils/auth";
-
+import { useAuth } from "../../context/AuthContext";
 import AuthForm from "../../components/AuthForm";
 
 export default function SigninPage() {
+    const { login } = useAuth();
+
     const navigate = useNavigate();
 
     const handleSignin = (data: Record<string, string>) => {
@@ -23,8 +24,7 @@ export default function SigninPage() {
                     alert(data.message);
                     return;
                 }
-                saveAuthData(data.token);
-                navigate("/menu");
+                login({ id: data.id, username: data.username }, data.token);
             })
             .catch((err) => {
                 alert("Error, try later");
