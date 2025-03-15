@@ -8,6 +8,7 @@ interface User {
 
 interface AuthContextType {
     user: User | null;
+    loading: boolean;
     login: (user: User, token: string) => void;
     logout: () => void;
 }
@@ -18,6 +19,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
 }) => {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         const token = Cookies.get("token");
@@ -34,7 +36,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
                 .catch(() => {
                     Cookies.remove("token");
                     setUser(null);
+                })
+                .finally(() => {
+                    setLoading(false);
                 });
+        } else {
+            setLoading(false);
         }
     }, []);
 
@@ -49,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     );
