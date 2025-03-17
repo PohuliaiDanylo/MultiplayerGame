@@ -8,6 +8,7 @@ import LoginPage from "../pages/Login/Login";
 import SigninPage from "../pages/Signin/Signin";
 import Menu from "../pages/Menu/Menu";
 import CreateRoom from "../pages/CreateRoom/CreateRoom";
+import JoinRoom from "../pages/JoinRoom/JoinRoom";
 
 export default function AppRoutes() {
     return (
@@ -51,6 +52,16 @@ export default function AppRoutes() {
                     element={
                         <PrivateRoute
                             element={<CreateRoom />}
+                            isPrivate={true}
+                            redirect={"/menu"}
+                        />
+                    }
+                />
+                <Route
+                    path="join-room"
+                    element={
+                        <PrivateRoute
+                            element={<JoinRoom />}
                             isPrivate={true}
                             redirect={"/menu"}
                         />
