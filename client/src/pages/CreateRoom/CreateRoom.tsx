@@ -19,6 +19,7 @@ export default function CreateRoom() {
                     roomName: formData.roomName,
                     password: formData.password,
                     ownerId: user.id,
+                    ownerUsername: user.username,
                 }),
             })
                 .then((res) => res.json())
@@ -38,8 +39,8 @@ export default function CreateRoom() {
     };
 
     return (
-        <main>
-            <h1 className="text-(length:--large-fs) text-(--text-clr)">
+        <main className=" flex flex-col gap-(--regular-gap)">
+            <h1 className="text-(length:--large-fs) text-(--text-clr) font-bold leading-(--large-fs)">
                 Create Room
             </h1>
             <Formik
@@ -75,7 +76,7 @@ export default function CreateRoom() {
                                     background: "var(--text-clr)",
                                     color: "var(--background-clr)",
                                     fontFamily: "var(--regular-ff)",
-                                    fontSize: "var(--small-fs)",
+                                    fontSize: "var(--medium-fs)",
                                     fontWeight: 700,
                                     textTransform: "none",
                                 }}
@@ -92,7 +93,7 @@ export default function CreateRoom() {
                                     background: "var(--text-clr)",
                                     color: "var(--background-clr)",
                                     fontFamily: "var(--regular-ff)",
-                                    fontSize: "var(--small-fs)",
+                                    fontSize: "var(--medium-fs)",
                                     fontWeight: 700,
                                     textTransform: "none",
                                 }}

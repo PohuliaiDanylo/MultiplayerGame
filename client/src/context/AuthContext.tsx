@@ -21,7 +21,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    useEffect(() => {
+    const updateUserContext = () => {
         const token = Cookies.get("token");
         if (token) {
             fetch("http://localhost:3000/api/user/getData", {
@@ -43,10 +43,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         } else {
             setLoading(false);
         }
+    };
+
+    useEffect(() => {
+        updateUserContext();
     }, []);
 
     const login = (user: User, token: string) => {
         Cookies.set("token", token, { expires: 7 });
+        updateUserContext();
         setUser(user);
     };
 

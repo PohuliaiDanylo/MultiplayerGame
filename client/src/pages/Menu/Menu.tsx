@@ -8,15 +8,15 @@ export default function Menu() {
     const { user, logout } = useAuth();
 
     return (
-        <div className=" items-start text-(--text-clr) flex flex-col gap-(--regular-gap)">
-            <div className=" w-full flex justify-between items-center">
+        <main className=" items-start text-(--text-clr) flex flex-col gap-(--regular-gap) w-screen max-w-[250px]">
+            <header className=" w-full flex justify-between items-center">
                 <p>{user?.username}</p>
                 <Button
                     sx={{
                         background: "var(--text-clr)",
                         color: "var(--background-clr)",
                         fontFamily: "var(--regular-ff)",
-                        fontSize: "var(--small-fs)",
+                        fontSize: "var(--medium-fs)",
                         fontWeight: 700,
                         textTransform: "none",
                     }}
@@ -27,11 +27,11 @@ export default function Menu() {
                 >
                     Sign out
                 </Button>
-            </div>
+            </header>
             <h1 className=" text-(length:--large-fs) font-bold leading-(--large-fs)">
                 Lobby
             </h1>
-            <div className=" flex flex-col gap-(--regular-gap)">
+            <div className=" flex flex-col gap-(--regular-gap) w-full">
                 <Button
                     sx={{
                         background: "var(--text-clr)",
@@ -69,6 +69,6 @@ export default function Menu() {
                     Join Room
                 </Button>
             </div>
-        </div>
+        </main>
     );
 }

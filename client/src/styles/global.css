@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./variables.css";
+@import "./animations.css";
 
 @font-face {
     font-family: "Inter";

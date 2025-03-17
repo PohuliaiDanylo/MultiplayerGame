@@ -5,10 +5,11 @@ const router = express.Router();
 
 router.post("/create", async (req: Request, res: Response) => {
     try {
-        const { roomName, password, ownerId } = req.body;
+        const { roomName, password, ownerId, ownerUsername } = req.body;
         const roomData: Record<string, string> = {
             roomName: roomName,
             ownerId: ownerId,
+            ownerUsername: ownerUsername,
         };
         if (password) {
             roomData.password = password;
@@ -16,6 +17,17 @@ router.post("/create", async (req: Request, res: Response) => {
         const newRoom = new Room(roomData);
         await newRoom.save();
         res.json({ message: "Room created", room: newRoom });
+    } catch (error) {
+        res.json({
+            message: "Server Error",
+        });
+    }
+});
+
+router.get("/getAll", async (req: Request, res: Response) => {
+    try {
+        const rooms = await Room.find({});
+        res.json({ rooms: rooms });
     } catch (error) {
         res.json({
             message: "Server Error",

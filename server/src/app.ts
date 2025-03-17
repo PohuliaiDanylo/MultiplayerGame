@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
+import roomRouter from "./routes/room";
 import { authMiddleware } from "./middlewares/authmiddleware";
 
 dotenv.config();
@@ -13,3 +14,4 @@ app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
 app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/user", authMiddleware, userRouter);
+app.use("/api/room", roomRouter);
