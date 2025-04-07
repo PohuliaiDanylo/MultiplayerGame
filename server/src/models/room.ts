@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
 
 const roomSchema = new mongoose.Schema(
     {
@@ -10,9 +10,9 @@ const roomSchema = new mongoose.Schema(
             type: String,
             enum: ["empty", "waiting for enemy", "active"],
             required: true,
-            default: "empty",
+            default: "waiting for enemy",
         },
-        players: { type: String, required: false },
+        players: [{ type: String }],
     },
     { timestamps: true }
 );

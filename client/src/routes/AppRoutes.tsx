@@ -9,12 +9,13 @@ import SigninPage from "../pages/Signin/Signin";
 import Menu from "../pages/Menu/Menu";
 import CreateRoom from "../pages/CreateRoom/CreateRoom";
 import JoinRoom from "../pages/JoinRoom/JoinRoom";
+import Game from "../pages/Game/Game";
 
 export default function AppRoutes() {
     return (
         <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
-            <Route element={<AuthLayout />}>
+            <Route path="auth" element={<AuthLayout />}>
                 <Route
                     path="login"
                     element={
@@ -43,7 +44,7 @@ export default function AppRoutes() {
                         <PrivateRoute
                             element={<Menu />}
                             isPrivate={true}
-                            redirect={"/login"}
+                            redirect={"/auth/login"}
                         />
                     }
                 />
@@ -53,7 +54,7 @@ export default function AppRoutes() {
                         <PrivateRoute
                             element={<CreateRoom />}
                             isPrivate={true}
-                            redirect={"/menu"}
+                            redirect={"/auth/menu"}
                         />
                     }
                 />
@@ -62,6 +63,16 @@ export default function AppRoutes() {
                     element={
                         <PrivateRoute
                             element={<JoinRoom />}
+                            isPrivate={true}
+                            redirect={"/menu"}
+                        />
+                    }
+                />
+                <Route
+                    path="game/:id"
+                    element={
+                        <PrivateRoute
+                            element={<Game />}
                             isPrivate={true}
                             redirect={"/menu"}
                         />

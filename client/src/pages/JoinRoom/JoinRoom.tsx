@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { Room, getRooms } from "../../utils/getRooms";
+import { socket } from "../../utils/socket";
 
 export default function JoinRoom() {
     const [rooms, setRooms] = useState<Room[]>([]);
@@ -12,14 +13,23 @@ export default function JoinRoom() {
     };
 
     const onJoin = (roomData: Room) => {
-        console.log(
-            "connecting to server, password required: " +
-                roomData.hasOwnProperty("password")
-        );
+        if (roomData.players && roomData.players?.length < 2) {
+            if (!roomData.hasOwnProperty("password")) {
+                navigate(`/game/${roomData._id}`);
+            } else {
+                console.log("password required");
+            }
+        } else {
+            alert("room is full");
+        }
     };
 
     useEffect(() => {
         onUpdate();
+
+        socket.on("roomsUpdated", (updatedRooms) => {
+            setRooms(updatedRooms);
+        });
     }, []);
 
     return (
@@ -27,7 +37,7 @@ export default function JoinRoom() {
             <h1 className=" text-(length:--large-fs) text-(--text-clr) font-bold line leading-(--large-fs)">
                 Join Room
             </h1>
-            <main className=" h-screen max-h-[30.5rem] w-screen max-w-[60rem] bg-(--accent-clr) rounded-(--regular-br) flex flex-col gap-(--regular-gap) py-(--regular-gap) overflow-hidden">
+            <main className=" h-screen max-h-[30.5rem] w-screen max-w-[60rem] bg-(--accent-clr) rounded-(--regular-br) flex flex-col gap-(--regular-gap) py-(--regular-gap) overflow-scroll overflow-x-hidden">
                 {rooms.map((room) => {
                     const hasPassword = room.hasOwnProperty("password");
                     return (
@@ -42,6 +52,7 @@ export default function JoinRoom() {
                                 Owner: {room.ownerUsername}
                             </p>
                             <div className=" flex items-center overflow-hidden justify-end gap-(--regular-gap) w-[20%] min-w-max">
+                                <p>{room.players?.length} / 2</p>
                                 <Button
                                     type="button"
                                     sx={{
@@ -89,23 +100,6 @@ export default function JoinRoom() {
                     onClick={() => navigate("/menu")}
                 >
                     Back
-                </Button>
-                <Button
-                    type="submit"
-                    sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
-                        fontFamily: "var(--regular-ff)",
-                        fontSize: "var(--medium-fs)",
-                        fontWeight: 700,
-                        textTransform: "none",
-                    }}
-                    variant="contained"
-                    disableElevation
-                    size="small"
-                    onClick={onUpdate}
-                >
-                    Update
                 </Button>
             </div>
         </div>

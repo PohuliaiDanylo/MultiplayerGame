@@ -1,3 +1,5 @@
+import { socket } from "../utils/socket";
+
 export type Room = {
     _id?: string;
     roomName: string;
@@ -8,22 +10,16 @@ export type Room = {
     players?: string[];
 };
 
-export function getRooms(
+export async function getRooms(
     setFunction: React.Dispatch<React.SetStateAction<Room[]>>
 ) {
-    const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
-    fetch(`${API_URL}/api/room/getAll`, {
-        method: "get",
-    })
-        .then((res) => res.json())
-        .then((data) => {
-            if (!data.rooms) {
-                alert(data.message);
-                return;
-            }
-            setFunction(data.rooms);
-        })
-        .catch((err) => {
-            alert("Error, try later");
-        });
+    try {
+        const response = await socket.emitWithAck("getRooms");
+        if (!response.rooms) {
+            alert(response.message);
+        }
+        setFunction(response.rooms);
+    } catch (error) {
+        alert("Error, try later");
+    }
 }

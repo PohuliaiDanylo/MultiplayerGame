@@ -50,7 +50,7 @@ export default function SigninPage() {
                     },
                 ]}
                 onButtonClick={() => {
-                    navigate("/login");
+                    navigate("/auth/login");
                 }}
                 onSubmit={handleSignin}
                 type="signin"

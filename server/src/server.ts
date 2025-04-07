@@ -1,9 +1,12 @@
-import { app } from "./app";
+import { server } from "./app";
 import { connectDB } from "./config/db";
-const PORT = process.env.PORT || process.env.PORT;
+import { initSockets } from "./sockets";
+
+const PORT = process.env.PORT || 3000;
 
 connectDB().then(() => {
-    app.listen(PORT, () => {
+    const io = initSockets(server);
+    server.listen(PORT, () => {
         console.log(`🚀 Server running at http://localhost:${PORT}`);
     });
 });

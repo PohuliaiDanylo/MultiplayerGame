@@ -3,36 +3,32 @@ import { useNavigate } from "react-router";
 import { TextField, Button } from "@mui/material";
 import { createRoomValidation } from "../../validations/createRoomValidation";
 import { useAuth } from "../../context/AuthContext";
+import { socket } from "../../utils/socket";
 
 export default function CreateRoom() {
     const navigate = useNavigate();
 
     const { user, logout } = useAuth();
 
-    const onSubmit = (formData: Record<string, string>) => {
+    const onSubmit = async (formData: Record<string, string>) => {
         if (user?.id) {
-            const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
-            fetch(`${API_URL}/api/room/create`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    roomName: formData.roomName,
-                    password: formData.password,
-                    ownerId: user.id,
-                    ownerUsername: user.username,
-                }),
-            })
-                .then((res) => res.json())
-                .then((data) => {
-                    if (!data.room) {
-                        alert(data.message);
-                        return;
-                    }
-                    console.log(data);
-                })
-                .catch((err) => {
-                    alert("Error, try later");
-                });
+            try {
+                const response = await socket.emitWithAck(
+                    "createRoom",
+                    formData.roomName,
+                    formData.password,
+                    user.id,
+                    user.username
+                );
+                console.log(response);
+                if (!response.room) {
+                    alert(response.message);
+                    return;
+                }
+                navigate(`/game/${response.room._id}`);
+            } catch (error) {
+                alert("Error, try later");
+            }
         } else {
             logout();
         }
