@@ -32,6 +32,7 @@ export default function AuthForm({
                         background: "var(--text-clr)",
                         color: "var(--background-clr)",
                         fontFamily: "var(--regular-ff)",
+                        fontSize: "var(--medium-fs)",
                         fontWeight: 700,
                         textTransform: "none",
                     }}
@@ -85,6 +86,7 @@ export default function AuthForm({
                                     background: "var(--text-clr)",
                                     color: "var(--background-clr)",
                                     fontFamily: "var(--regular-ff)",
+                                    fontSize: "var(--medium-fs)",
                                     fontWeight: 700,
                                     textTransform: "none",
                                 }}

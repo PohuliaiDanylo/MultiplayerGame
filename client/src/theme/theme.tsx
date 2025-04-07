@@ -10,13 +10,14 @@ const theme = createTheme({
                         color: "var(--text-clr)",
                     },
                     "& .MuiFormLabel-root": {
-                        color: "var(--text-clr)",
+                        color: "var(--background-clr)",
                     },
                     "& .MuiFormLabel-root.Mui-error": {
-                        color: "var(--text-clr)",
+                        color: "var(--background-clr)",
                     },
                     "& .css-113d811-MuiFormLabel-root-MuiInputLabel-root": {
                         background: "var(--accent-clr)",
+                        color: "var(--background-clr)",
                         padding: "2px 8px",
                         borderRadius: "4px",
                     },

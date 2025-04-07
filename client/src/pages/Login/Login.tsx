@@ -39,7 +39,7 @@ export default function LoginPage() {
                 { name: "password", type: "password", placeholder: "password" },
             ]}
             onButtonClick={() => {
-                navigate("/sign-in");
+                navigate("/auth/sign-in");
             }}
             onSubmit={handleLogin}
             type="login"

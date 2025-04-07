@@ -2,6 +2,7 @@
     --background-clr: #006d77;
     --accent-clr: #83c5be;
     --text-clr: #edf6f9;
+    --darken-text-clr: #d9d9d9;
     --error-clr: #ff4d4d;
 
     --regular-ff: "Inter";
@@ -9,6 +10,9 @@
     --large-fs: 48px;
     --big-fs: 24px;
     --medium-fs: 16px;
+    --small-fs: 12px;
 
     --regular-gap: 16px;
+
+    --regular-br: 4px;
 }
