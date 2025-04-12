@@ -38,4 +38,10 @@ export function handleRoomSockets(io: Server, socket: Socket) {
             }
         }
     );
+    socket.on("join_room", (roomId, userId) => {
+        socket.join(roomId);
+    });
+    socket.on("leave_room", (roomId, userId) => {
+        socket.leave(roomId);
+    });
 }
