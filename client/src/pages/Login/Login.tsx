@@ -25,7 +25,7 @@ export default function LoginPage() {
                 }
                 login({ id: data.id, username: data.username }, data.token);
             })
-            .catch((err) => {
+            .catch(() => {
                 alert("Error, try later");
             });
     };
