@@ -43,21 +43,21 @@ export default function JoinRoom() {
                     return (
                         <div
                             key={room._id}
-                            className=" flex gap-(--regular-gap) items-center justify-between bg-(--text-clr) rounded-(--regular-br) px-8 py-2 mx-(--regular-gap)"
+                            className=" flex gap-(--regular-gap) items-center justify-between bg-(--second-background-clr) rounded-(--regular-br) px-8 py-2 mx-(--regular-gap)"
                         >
-                            <header className="w-[20%] overflow-hidden whitespace-nowrap text-(--background-clr) font-bold ">
+                            <header className="w-[20%] overflow-hidden whitespace-nowrap text-(--second-text-clr) font-bold ">
                                 <p className={`w-min`}>{room.roomName}</p>
                             </header>
-                            <p className="self-start text-(length:--small-fs) text-(--background-clr) font-bold">
+                            <p className="self-start text-(length:--small-fs) text-(--darken-text-clr) font-bold">
                                 Owner: {room.ownerUsername}
                             </p>
                             <div className=" flex items-center overflow-hidden justify-end gap-(--regular-gap) w-[20%] min-w-max">
-                                <p>{room.players?.length} / 2</p>
+                                <p className="text-(--second-text-clr)">{room.players?.length} / 2</p>
                                 <Button
                                     type="button"
                                     sx={{
-                                        background: "var(--darken-text-clr)",
-                                        color: "var(--background-clr)",
+                                        background: "var(--background-clr)",
+                                        color: "var(--darken-text-clr)",
                                         fontFamily: "var(--regular-ff)",
                                         fontSize: "var(--medium-fs)",
                                         fontWeight: 700,
@@ -71,6 +71,7 @@ export default function JoinRoom() {
                                     Join
                                 </Button>
                                 <img
+                                className=" invert"
                                     src={
                                         hasPassword
                                             ? "/password/required.png"
@@ -87,8 +88,8 @@ export default function JoinRoom() {
                 <Button
                     type="submit"
                     sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
+                        background: "var(--second-background-clr)",
+                        color: "var(--second-text-clr)",
                         fontFamily: "var(--regular-ff)",
                         fontSize: "var(--medium-fs)",
                         fontWeight: 700,

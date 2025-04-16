@@ -29,8 +29,8 @@ export default function AuthForm({
                 </h1>
                 <Button
                     sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
+                        background: "var(--second-background-clr)",
+                        color: "var(--second-text-clr)",
                         fontFamily: "var(--regular-ff)",
                         fontSize: "var(--medium-fs)",
                         fontWeight: 700,
@@ -83,8 +83,8 @@ export default function AuthForm({
                             <Button
                                 type="submit"
                                 sx={{
-                                    background: "var(--text-clr)",
-                                    color: "var(--background-clr)",
+                                    background: "var(--second-background-clr)",
+                                    color: "var(--second-text-clr)",
                                     fontFamily: "var(--regular-ff)",
                                     fontSize: "var(--medium-fs)",
                                     fontWeight: 700,

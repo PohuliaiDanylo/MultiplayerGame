@@ -10,11 +10,11 @@ export default function Menu() {
     return (
         <main className=" items-start text-(--text-clr) flex flex-col gap-(--regular-gap) w-screen max-w-[250px]">
             <header className=" w-full flex justify-between items-center">
-                <p>{user?.username}</p>
+                <p className="text-(--second-text-clr)">{user?.username}</p>
                 <Button
                     sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
+                        background: "var(--second-background-clr)",
+                        color: "var(--second-text-clr)",
                         fontFamily: "var(--regular-ff)",
                         fontSize: "var(--medium-fs)",
                         fontWeight: 700,
@@ -34,8 +34,8 @@ export default function Menu() {
             <div className=" flex flex-col gap-(--regular-gap) w-full">
                 <Button
                     sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
+                        background: "var(--second-background-clr)",
+                        color: "var(--second-text-clr)",
                         fontFamily: "var(--regular-ff)",
                         fontSize: "var(--big-fs)",
                         fontWeight: 700,
@@ -52,8 +52,8 @@ export default function Menu() {
                 </Button>
                 <Button
                     sx={{
-                        background: "var(--text-clr)",
-                        color: "var(--background-clr)",
+                        background: "var(--second-background-clr)",
+                        color: "var(--second-text-clr)",
                         fontFamily: "var(--regular-ff)",
                         fontSize: "var(--big-fs)",
                         fontWeight: 700,
