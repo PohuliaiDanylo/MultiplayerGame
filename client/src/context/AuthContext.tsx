@@ -23,8 +23,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
     const updateUserContext = () => {
         const token = Cookies.get("token");
+        const API_URL = import.meta.env.VITE_REACT_APP_API_URL;
         if (token) {
-            fetch("http://localhost:3000/api/user/getData", {
+            fetch(`${API_URL}/api/user/getData`, {
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((res) => res.json())
