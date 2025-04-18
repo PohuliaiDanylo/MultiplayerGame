@@ -13,11 +13,11 @@ export default function JoinRoom() {
     };
 
     const onJoin = (roomData: Room) => {
-        if (roomData.players && roomData.players?.length < 2) {
+        if (JSON.parse(roomData.players).length < 2) {
             if (!roomData.hasOwnProperty("password")) {
-                navigate(`/game/${roomData._id}`);
+                navigate(`/game/${roomData.roomId}`);
             } else {
-                console.log("password required");
+                alert("password required");
             }
         } else {
             alert("room is full");
@@ -42,7 +42,7 @@ export default function JoinRoom() {
                     const hasPassword = room.hasOwnProperty("password");
                     return (
                         <div
-                            key={room._id}
+                            key={room.roomId}
                             className=" flex gap-(--regular-gap) items-center justify-between bg-(--second-background-clr) rounded-(--regular-br) px-8 py-2 mx-(--regular-gap)"
                         >
                             <header className="w-[20%] overflow-hidden whitespace-nowrap text-(--second-text-clr) font-bold ">
@@ -52,7 +52,7 @@ export default function JoinRoom() {
                                 Owner: {room.ownerUsername}
                             </p>
                             <div className=" flex items-center overflow-hidden justify-end gap-(--regular-gap) w-[20%] min-w-max">
-                                <p className="text-(--second-text-clr)">{room.players?.length} / 2</p>
+                                <p className="text-(--second-text-clr)">{JSON.parse(room.players).length} / 2</p>
                                 <Button
                                     type="button"
                                     sx={{

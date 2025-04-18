@@ -20,12 +20,11 @@ export default function CreateRoom() {
                     user.id,
                     user.username
                 );
-                console.log(response);
                 if (!response.room) {
                     alert(response.message);
                     return;
                 }
-                navigate(`/game/${response.room._id}`);
+                navigate(`/game/${response.room.roomId}`);
             } catch (error) {
                 alert("Error, try later");
             }
