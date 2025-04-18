@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import authRouter from "./routes/auth";
 import userRouter from "./routes/user";
 import { authMiddleware } from "./middlewares/authmiddleware";
-import { initSockets } from "./sockets";
 
 dotenv.config();
 
