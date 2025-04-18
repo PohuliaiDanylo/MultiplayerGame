@@ -1,13 +1,13 @@
 import { socket } from "../utils/socket";
 
 export type Room = {
-    _id?: string;
+    roomId: string;
     roomName: string;
     password?: string;
     ownerId: string;
     ownerUsername: string;
     status: string;
-    players?: string[];
+    players: string;
 };
 
 export async function getRooms(
